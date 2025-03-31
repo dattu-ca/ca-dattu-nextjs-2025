@@ -1,9 +1,6 @@
 import { DemoSchema } from "#/db/demo";
 
 const DemoComponent = async () => {
-  await DemoSchema.create({
-    todo: 'HELLO WORLD Auto TODO'
-  })
   const demoResults = await DemoSchema.find();
   return (
     <div>
