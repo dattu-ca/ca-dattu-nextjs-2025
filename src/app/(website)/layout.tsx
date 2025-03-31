@@ -4,6 +4,7 @@ import "./globals.css";
 
 
 import clsx from "clsx";
+import UnderConstruction from "#/components/under-construction";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({
           "bg-slate-100"
         )}
       >
+        <UnderConstruction/>
         {children}
       </body>
     </html>
