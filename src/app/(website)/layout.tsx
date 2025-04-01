@@ -37,7 +37,7 @@ export const generateMetadata = async (): Promise<Metadata | null> => {
         template: `%s | ${
           siteMetadata.defaultTitleTempalte || siteMetadata.metadata?.metaTitle
         }`,
-        default: siteMetadata.metadata?.metaTitle!,
+        default: siteMetadata.metadata?.metaTitle ?? "",
       },
       icons: {
         icon: favicon || "https://dattu.ca/favicon.ico",
