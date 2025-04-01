@@ -6,7 +6,6 @@ export const MetadataBaseFields: Field[] = [
   {
     name: "metaTitle",
     type: "text",
-    required: true,
     admin: {
       description:
         "The SEO title of the page, used in search engine results and the browser tab.",

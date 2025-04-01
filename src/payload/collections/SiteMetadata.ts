@@ -39,7 +39,6 @@ export const SiteMetadata: CollectionConfig = {
     {
       name: "defaultTitleTempalte",
       type: "text",
-      required: true,
     },
     {
       name: "favicon",
