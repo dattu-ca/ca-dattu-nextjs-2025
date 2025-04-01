@@ -41,6 +41,16 @@ export const SiteMetadata: CollectionConfig = {
       type: "text",
       required: true,
     },
+    {
+      name: "favicon",
+      label: "favicon",
+      type: "relationship",
+      relationTo: "media",
+      admin: {
+        description:
+          "The favorite icon",
+      },
+    },
     ...MetadataBaseFields
   ],
 };

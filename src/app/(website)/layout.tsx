@@ -23,6 +23,13 @@ export const generateMetadata = async (): Promise<Metadata | null> => {
 
     if (!siteMetadata) return null;
 
+    const favicon =
+      typeof siteMetadata.favicon === "object" &&
+      siteMetadata.favicon !== null &&
+      "url" in siteMetadata.favicon
+        ? siteMetadata.favicon.url || undefined
+        : undefined;
+
     const ogImage =
       typeof siteMetadata.socialMedia?.og?.ogImage === "object" &&
       siteMetadata.socialMedia?.og?.ogImage !== null &&
@@ -50,6 +57,7 @@ export const generateMetadata = async (): Promise<Metadata | null> => {
         ? siteMetadata.keywords.split(", ")
         : undefined,
       robots: siteMetadata.noindex ? "noindex, nofollow" : "index, follow",
+
       openGraph: {
         title: siteMetadata.socialMedia?.og?.ogTitle || siteMetadata.metaTitle,
         description:
@@ -76,6 +84,9 @@ export const generateMetadata = async (): Promise<Metadata | null> => {
           undefined,
         images: twitterImage,
         creator: siteMetadata.socialMedia?.twitter?.twitterCreator || undefined,
+      },
+      icons: {
+        icon: favicon || "https://dattu.ca/favicon.ico",
       },
     };
   } catch (error) {

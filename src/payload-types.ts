@@ -240,6 +240,10 @@ export interface SiteMetadatum {
   id: string;
   defaultTitleTempalte: string;
   /**
+   * The favorite icon
+   */
+  favicon?: (string | null) | Media;
+  /**
    * The SEO title of the page, used in search engine results and the browser tab.
    */
   metaTitle: string;
@@ -514,6 +518,7 @@ export interface MetadataSelect<T extends boolean = true> {
  */
 export interface SiteMetadataSelect<T extends boolean = true> {
   defaultTitleTempalte?: T;
+  favicon?: T;
   metaTitle?: T;
   metaDescription?: T;
   canonicalURL?: T;
