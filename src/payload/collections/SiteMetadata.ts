@@ -1,5 +1,6 @@
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, Field } from "payload";
 import { MetadataBaseFields } from "./Metadata";
+
 
 export const SiteMetadata: CollectionConfig = {
   slug: "siteMetadata",
@@ -35,6 +36,11 @@ export const SiteMetadata: CollectionConfig = {
     ],
   },
   fields: [
+    {
+      name: "defaultTitleTempalte",
+      type: "text",
+      required: true,
+    },
     ...MetadataBaseFields
   ],
 };

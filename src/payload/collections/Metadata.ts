@@ -89,7 +89,7 @@ export const MetadataBaseFields: Field[] = [
             name: "ogType",
             label: "ogType",
             type: "select",
-            options: ["website", "article", "video"],
+            options: ["website", "article"],
             defaultValue: "website",
             admin: {
               description:

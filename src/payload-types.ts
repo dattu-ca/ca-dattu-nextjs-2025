@@ -200,7 +200,7 @@ export interface Metadatum {
       /**
        * The type of content for Open Graph (e.g., `article`, `video`, `website`).
        */
-      ogType?: ('website' | 'article' | 'video') | null;
+      ogType?: ('website' | 'article') | null;
       /**
        * Override the Open Graph URL (optional, defaults to the current page's URL).
        */
@@ -238,6 +238,7 @@ export interface Metadatum {
  */
 export interface SiteMetadatum {
   id: string;
+  defaultTitleTempalte: string;
   /**
    * The SEO title of the page, used in search engine results and the browser tab.
    */
@@ -275,7 +276,7 @@ export interface SiteMetadatum {
       /**
        * The type of content for Open Graph (e.g., `article`, `video`, `website`).
        */
-      ogType?: ('website' | 'article' | 'video') | null;
+      ogType?: ('website' | 'article') | null;
       /**
        * Override the Open Graph URL (optional, defaults to the current page's URL).
        */
@@ -512,6 +513,7 @@ export interface MetadataSelect<T extends boolean = true> {
  * via the `definition` "siteMetadata_select".
  */
 export interface SiteMetadataSelect<T extends boolean = true> {
+  defaultTitleTempalte?: T;
   metaTitle?: T;
   metaDescription?: T;
   canonicalURL?: T;
