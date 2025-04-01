@@ -2,8 +2,7 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb";
 import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
-import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
-
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 
 import path from "path";
 import { buildConfig } from "payload";
@@ -12,6 +11,7 @@ import sharp from "sharp";
 
 import { Users } from "./payload/collections/Users";
 import { Media } from "./payload/collections/Media";
+import { Metadata } from "./payload/collections/Metadata";
 import { SiteMetadata } from "./payload/collections/SiteMetadata";
 import { Page } from "./payload/collections/Page";
 import { Post } from "./payload/collections/Post";
@@ -39,7 +39,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, SiteMetadata, Page, Post],
+  collections: [Users, Media, Metadata, SiteMetadata, Page, Post],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
@@ -48,11 +48,11 @@ export default buildConfig({
   db: mongooseAdapter({
     url: DATABASE_URI,
   }),
-  routes:{
-    admin: '/payload/admin',
-    api: '/payload/api',
-    graphQL: '/payload/api/graphql',
-    graphQLPlayground: '/payload/api/graphql-playground',
+  routes: {
+    admin: "/payload/admin",
+    api: "/payload/api",
+    graphQL: "/payload/api/graphql",
+    graphQLPlayground: "/payload/api/graphql-playground",
   },
   sharp,
   plugins: [

@@ -68,6 +68,7 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    metadata: Metadatum;
     siteMetadata: SiteMetadatum;
     page: Page;
     post: Post;
@@ -79,6 +80,7 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    metadata: MetadataSelect<false> | MetadataSelect<true>;
     siteMetadata: SiteMetadataSelect<false> | SiteMetadataSelect<true>;
     page: PageSelect<false> | PageSelect<true>;
     post: PostSelect<false> | PostSelect<true>;
@@ -156,14 +158,153 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "metadata".
+ */
+export interface Metadatum {
+  id: string;
+  slug: string;
+  /**
+   * The SEO title of the page, used in search engine results and the browser tab.
+   */
+  metaTitle: string;
+  /**
+   * The SEO meta description shown in search engine results below the title.
+   */
+  metaDescription?: string | null;
+  /**
+   * The canonical URL for the page to avoid duplicate content issues.
+   */
+  canonicalURL?: string | null;
+  /**
+   * SEO keywords (optional, usually ignored by modern search engines).
+   */
+  keywords?: string | null;
+  /**
+   * Prevent search engines from indexing the page (useful for private pages).
+   */
+  noindex?: boolean | null;
+  socialMedia?: {
+    og?: {
+      /**
+       * Title for Open Graph metadata when shared on social platforms like Facebook or LinkedIn. Defaults to `metaTitle`.
+       */
+      ogTitle?: string | null;
+      /**
+       * Description for Open Graph metadata when shared on social media. Defaults to `metaDescription`.
+       */
+      ogDescription?: string | null;
+      /**
+       * The preview image used for Open Graph sharing (can be different from `metaDescription`).
+       */
+      ogImage?: (string | null) | Media;
+      /**
+       * The type of content for Open Graph (e.g., `article`, `video`, `website`).
+       */
+      ogType?: ('website' | 'article') | null;
+      /**
+       * Override the Open Graph URL (optional, defaults to the current page's URL).
+       */
+      ogURL?: string | null;
+    };
+    twitter?: {
+      /**
+       * Twitter card type (`summary` or `summary_large_image`).
+       */
+      twitterCardType?: ('summary' | 'summary_large_image') | null;
+      /**
+       * The title for the Twitter Card when shared on Twitter. Defaults to `metaTitle`.
+       */
+      twitterTitle?: string | null;
+      /**
+       * The description for the Twitter Card when shared on Twitter. Defaults to `metaDescription`.
+       */
+      twitterDescription?: string | null;
+      /**
+       * The image used for the Twitter Card. This can be different from the `ogImage`.
+       */
+      twitterImage?: (string | null) | Media;
+      /**
+       * Twitter handle of the content creator (e.g., `@username`).
+       */
+      twitterCreator?: string | null;
+    };
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "siteMetadata".
  */
 export interface SiteMetadatum {
   id: string;
-  title: string;
-  description?: string | null;
-  isPublished: boolean;
-  publishedAt?: string | null;
+  defaultTitleTempalte: string;
+  /**
+   * The SEO title of the page, used in search engine results and the browser tab.
+   */
+  metaTitle: string;
+  /**
+   * The SEO meta description shown in search engine results below the title.
+   */
+  metaDescription?: string | null;
+  /**
+   * The canonical URL for the page to avoid duplicate content issues.
+   */
+  canonicalURL?: string | null;
+  /**
+   * SEO keywords (optional, usually ignored by modern search engines).
+   */
+  keywords?: string | null;
+  /**
+   * Prevent search engines from indexing the page (useful for private pages).
+   */
+  noindex?: boolean | null;
+  socialMedia?: {
+    og?: {
+      /**
+       * Title for Open Graph metadata when shared on social platforms like Facebook or LinkedIn. Defaults to `metaTitle`.
+       */
+      ogTitle?: string | null;
+      /**
+       * Description for Open Graph metadata when shared on social media. Defaults to `metaDescription`.
+       */
+      ogDescription?: string | null;
+      /**
+       * The preview image used for Open Graph sharing (can be different from `metaDescription`).
+       */
+      ogImage?: (string | null) | Media;
+      /**
+       * The type of content for Open Graph (e.g., `article`, `video`, `website`).
+       */
+      ogType?: ('website' | 'article') | null;
+      /**
+       * Override the Open Graph URL (optional, defaults to the current page's URL).
+       */
+      ogURL?: string | null;
+    };
+    twitter?: {
+      /**
+       * Twitter card type (`summary` or `summary_large_image`).
+       */
+      twitterCardType?: ('summary' | 'summary_large_image') | null;
+      /**
+       * The title for the Twitter Card when shared on Twitter. Defaults to `metaTitle`.
+       */
+      twitterTitle?: string | null;
+      /**
+       * The description for the Twitter Card when shared on Twitter. Defaults to `metaDescription`.
+       */
+      twitterDescription?: string | null;
+      /**
+       * The image used for the Twitter Card. This can be different from the `ogImage`.
+       */
+      twitterImage?: (string | null) | Media;
+      /**
+       * Twitter handle of the content creator (e.g., `@username`).
+       */
+      twitterCreator?: string | null;
+    };
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -239,6 +380,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'metadata';
+        value: string | Metadatum;
       } | null)
     | ({
         relationTo: 'siteMetadata';
@@ -329,13 +474,73 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "metadata_select".
+ */
+export interface MetadataSelect<T extends boolean = true> {
+  slug?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  canonicalURL?: T;
+  keywords?: T;
+  noindex?: T;
+  socialMedia?:
+    | T
+    | {
+        og?:
+          | T
+          | {
+              ogTitle?: T;
+              ogDescription?: T;
+              ogImage?: T;
+              ogType?: T;
+              ogURL?: T;
+            };
+        twitter?:
+          | T
+          | {
+              twitterCardType?: T;
+              twitterTitle?: T;
+              twitterDescription?: T;
+              twitterImage?: T;
+              twitterCreator?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "siteMetadata_select".
  */
 export interface SiteMetadataSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  isPublished?: T;
-  publishedAt?: T;
+  defaultTitleTempalte?: T;
+  metaTitle?: T;
+  metaDescription?: T;
+  canonicalURL?: T;
+  keywords?: T;
+  noindex?: T;
+  socialMedia?:
+    | T
+    | {
+        og?:
+          | T
+          | {
+              ogTitle?: T;
+              ogDescription?: T;
+              ogImage?: T;
+              ogType?: T;
+              ogURL?: T;
+            };
+        twitter?:
+          | T
+          | {
+              twitterCardType?: T;
+              twitterTitle?: T;
+              twitterDescription?: T;
+              twitterImage?: T;
+              twitterCreator?: T;
+            };
+      };
   updatedAt?: T;
   createdAt?: T;
 }
