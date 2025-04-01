@@ -172,7 +172,7 @@ export const Metadata: CollectionConfig = {
   slug: "metadata",
   hooks: {
     beforeChange: [
-      async ({ req, operation, data }) => {
+      async ({ operation, data }) => {
         if (operation === "create") {
           // Set slug if not provided, based on metaTitle
           if (!data.slug) {
