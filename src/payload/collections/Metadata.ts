@@ -167,7 +167,7 @@ export const MetadataBaseFields: Field[] = [
   },
 ];
 
-// Site Metadata Collection
+// Metadata Collection
 export const Metadata: CollectionConfig = {
   slug: "metadata",
   hooks: {

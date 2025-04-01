@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import slugify from "slugify";
+import { MetadataBaseFields } from "./Metadata";
 
 export const Page: CollectionConfig = {
   slug: "page",
@@ -9,7 +10,7 @@ export const Page: CollectionConfig = {
         if (operation === "create") {
           if (!data.slug) {
             const slug = slugify(data.heading, {
-                lower: true,
+              lower: true,
             });
             data.slug = slug;
           }
@@ -54,6 +55,11 @@ export const Page: CollectionConfig = {
       name: "publishedAt",
       type: "date",
       required: false,
+    },
+    {
+      name: "metadata",
+      type: "group",
+      fields: MetadataBaseFields,
     },
   ],
 };
