@@ -22,7 +22,7 @@ export const generateMetadata = async (): Promise<Metadata | null> => {
   try {
     const siteMetadata = await payloadServices.fetchSiteMetaData();
 
-    if (!siteMetadata) return null;
+    if (!siteMetadata || !siteMetadata.metadata) return null;
 
     const favicon =
       typeof siteMetadata.favicon === "object" &&
@@ -32,16 +32,16 @@ export const generateMetadata = async (): Promise<Metadata | null> => {
         : undefined;
 
     return {
+      ...proessAndGetMetadata({ metadata: siteMetadata.metadata }),
       title: {
         template: `%s | ${
           siteMetadata.defaultTitleTempalte || siteMetadata.metadata?.metaTitle
         }`,
-        default: siteMetadata.metadata?.metaTitle,
+        default: siteMetadata.metadata?.metaTitle ?? "",
       },
       icons: {
         icon: favicon || "https://dattu.ca/favicon.ico",
       },
-      ...proessAndGetMetadata({ metadata: siteMetadata.metadata }),
     };
   } catch (error) {
     console.error("Error fetching site metadata:", error);

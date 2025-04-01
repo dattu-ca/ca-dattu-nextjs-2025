@@ -166,7 +166,7 @@ export interface Metadatum {
   /**
    * The SEO title of the page, used in search engine results and the browser tab.
    */
-  metaTitle: string;
+  metaTitle?: string | null;
   /**
    * The SEO meta description shown in search engine results below the title.
    */
@@ -238,16 +238,16 @@ export interface Metadatum {
  */
 export interface SiteMetadatum {
   id: string;
-  defaultTitleTempalte: string;
+  defaultTitleTempalte?: string | null;
   /**
    * The favorite icon
    */
   favicon?: (string | null) | Media;
-  metadata: {
+  metadata?: {
     /**
      * The SEO title of the page, used in search engine results and the browser tab.
      */
-    metaTitle: string;
+    metaTitle?: string | null;
     /**
      * The SEO meta description shown in search engine results below the title.
      */
@@ -340,11 +340,11 @@ export interface Page {
   };
   isPublished: boolean;
   publishedAt?: string | null;
-  metadata: {
+  metadata?: {
     /**
      * The SEO title of the page, used in search engine results and the browser tab.
      */
-    metaTitle: string;
+    metaTitle?: string | null;
     /**
      * The SEO meta description shown in search engine results below the title.
      */
@@ -437,11 +437,11 @@ export interface Post {
   };
   isPublished: boolean;
   publishedAt?: string | null;
-  metadata: {
+  metadata?: {
     /**
      * The SEO title of the page, used in search engine results and the browser tab.
      */
-    metaTitle: string;
+    metaTitle?: string | null;
     /**
      * The SEO meta description shown in search engine results below the title.
      */

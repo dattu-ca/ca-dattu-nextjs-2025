@@ -29,7 +29,8 @@ export const proessAndGetSocialMetadata = ({
       keywords: metadata.keywords ? metadata.keywords.split(", ") : undefined,
       robots: metadata.noindex ? "noindex, nofollow" : "index, follow",
       openGraph: {
-        title: metadata.socialMedia?.og?.ogTitle || metadata.metaTitle || undefined,
+        title:
+          metadata.socialMedia?.og?.ogTitle || metadata.metaTitle || undefined,
         description:
           metadata.socialMedia?.og?.ogDescription ||
           metadata.metaDescription ||
@@ -44,7 +45,7 @@ export const proessAndGetSocialMetadata = ({
           metadata.socialMedia?.twitter?.twitterCardType ||
           "summary_large_image",
         title:
-          metadata.socialMedia?.twitter?.twitterTitle || metadata.metaTitle,
+          metadata.socialMedia?.twitter?.twitterTitle || metadata.metaTitle || undefined,
         description:
           metadata.socialMedia?.twitter?.twitterDescription ||
           metadata.metaDescription ||
@@ -54,5 +55,8 @@ export const proessAndGetSocialMetadata = ({
       },
     };
   }
-  return {};
+  return {
+    title: metadata.metaTitle,
+    description: metadata.metaDescription,
+  };
 };
