@@ -6,6 +6,7 @@ import clsx from "clsx";
 import UnderConstruction from "#/components/under-construction";
 import { payloadServices } from "#/services/payload";
 import { Metadata } from "next";
+import { proessAndGetSocialMetadata as proessAndGetMetadata } from "#/utils/metadata";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,64 +31,17 @@ export const generateMetadata = async (): Promise<Metadata | null> => {
         ? siteMetadata.favicon.url || undefined
         : undefined;
 
-    const ogImage =
-      typeof siteMetadata.socialMedia?.og?.ogImage === "object" &&
-      siteMetadata.socialMedia?.og?.ogImage !== null &&
-      "url" in siteMetadata.socialMedia?.og?.ogImage
-        ? siteMetadata.socialMedia?.og?.ogImage.url || undefined
-        : undefined;
-
-    const twitterImage =
-      typeof siteMetadata.socialMedia?.twitter?.twitterImage === "object" &&
-      siteMetadata.socialMedia?.twitter?.twitterImage !== null &&
-      "url" in siteMetadata.socialMedia?.twitter?.twitterImage
-        ? siteMetadata.socialMedia?.twitter?.twitterImage.url || undefined
-        : undefined;
-
     return {
       title: {
-        template: `%s | ${siteMetadata.defaultTitleTempalte}`,
-        default: siteMetadata.metaTitle,
-      },
-      description: siteMetadata.metaDescription,
-      alternates: {
-        canonical: siteMetadata.canonicalURL || undefined,
-      },
-      keywords: siteMetadata.keywords
-        ? siteMetadata.keywords.split(", ")
-        : undefined,
-      robots: siteMetadata.noindex ? "noindex, nofollow" : "index, follow",
-
-      openGraph: {
-        title: siteMetadata.socialMedia?.og?.ogTitle || siteMetadata.metaTitle,
-        description:
-          siteMetadata.socialMedia?.og?.ogDescription ||
-          siteMetadata.metaDescription ||
-          undefined,
-        url:
-          siteMetadata.socialMedia?.og?.ogURL ||
-          siteMetadata.canonicalURL ||
-          undefined,
-        type: siteMetadata.socialMedia?.og?.ogType || "website",
-        images: ogImage,
-      },
-      twitter: {
-        card:
-          siteMetadata.socialMedia?.twitter?.twitterCardType ||
-          "summary_large_image",
-        title:
-          siteMetadata.socialMedia?.twitter?.twitterTitle ||
-          siteMetadata.metaTitle,
-        description:
-          siteMetadata.socialMedia?.twitter?.twitterDescription ||
-          siteMetadata.metaDescription ||
-          undefined,
-        images: twitterImage,
-        creator: siteMetadata.socialMedia?.twitter?.twitterCreator || undefined,
+        template: `%s | ${
+          siteMetadata.defaultTitleTempalte || siteMetadata.metadata?.metaTitle
+        }`,
+        default: siteMetadata.metadata?.metaTitle,
       },
       icons: {
         icon: favicon || "https://dattu.ca/favicon.ico",
       },
+      ...proessAndGetMetadata({ metadata: siteMetadata.metadata }),
     };
   } catch (error) {
     console.error("Error fetching site metadata:", error);

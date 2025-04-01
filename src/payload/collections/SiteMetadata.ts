@@ -51,6 +51,10 @@ export const SiteMetadata: CollectionConfig = {
           "The favorite icon",
       },
     },
-    ...MetadataBaseFields
+    {
+      name: "metadata",
+      type: "group",
+      fields: MetadataBaseFields,
+    },
   ],
 };
