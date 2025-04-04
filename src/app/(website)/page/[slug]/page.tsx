@@ -1,5 +1,6 @@
 import { payloadServices } from "#/services/payload";
 import { Metadata } from "next";
+import { LexicalRichTextRenderer } from "#/components/lexicalRenderer";
 
 type tParams = Promise<{ slug: string }>;
 
@@ -20,7 +21,6 @@ export const generateMetadata = async (props: {
     return {
       title: page.metadata.metaTitle || page.heading,
       description: page.metadata.metaTitle,
-      
     };
   } catch (error) {
     console.error("Error fetching page:", error);
@@ -33,10 +33,10 @@ const Page = async (props: { params: tParams }) => {
   const page = await payloadServices.fetchPageBySlug({ slug });
 
   return (
-    <div>
+    <div className="prose lg:prose-sm prose-neutral">
       <pre>{JSON.stringify({ slug }, null, 2)}</pre>
-      <h1 className="text-2xl/7 font-bold">Post: {page?.heading}</h1>
-      <pre>{JSON.stringify(page, null, 2)}</pre>
+      <h1>Page: {page?.heading}</h1>
+      {page?.content && <LexicalRichTextRenderer data={page.content} />}
     </div>
   );
 };
