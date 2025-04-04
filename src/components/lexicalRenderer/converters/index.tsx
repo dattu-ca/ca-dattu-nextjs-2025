@@ -23,7 +23,6 @@ export const jsxConverter: JSXConvertersFunction<NodeTypes> = ({
 }) => ({
   ...defaultConverters,
   link: ({ node, nodesToJSX }) => {
-    console.log(node);
     const text = nodesToJSX({ nodes: node.children });
     if (node.fields.linkType === "internal") {
       const relationTo = node.fields.doc?.relationTo;

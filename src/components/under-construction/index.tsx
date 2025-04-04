@@ -13,6 +13,7 @@ const UnderConstruction = () => {
           >
             https://github.com/dattu-ca/ca-dattu-nextjs-2025
           </a>
+          {(new Date()).toLocaleString()}
         </p>
       </div>
     </div>
