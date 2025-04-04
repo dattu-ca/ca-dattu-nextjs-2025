@@ -63,7 +63,7 @@ export default function RootLayout({
         )}
       >
         <UnderConstruction />
-        {children}
+        <div className="pt-[124px]">{children}</div>
       </body>
     </html>
   );

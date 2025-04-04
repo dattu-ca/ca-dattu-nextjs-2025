@@ -1,9 +1,12 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --list-roman: ""
 }
 
 @theme inline {
@@ -21,7 +24,84 @@
 } */
 
 body {
-  
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+@layer base {
+  h1 {
+    @apply text-[40px] leading-[48px] lg:text-[48px] lg:leading-[60px]  xl:text-[58px] xl:leading-[74px];
+  }
+  h2 {
+    @apply text-[32px] leading-[40px] lg:text-[36px] lg:leading-[44px] xl:text-[40px] xl:leading-[48px];
+  }
+  h3 {
+    @apply text-[28px] leading-[36px] md:text-[36px] md:leading-[44px];
+  }
+  h4 {
+    @apply font-medium text-[32px] leading-[40px];
+  }
+  h5 {
+    @apply text-[28px] leading-[36px];
+  }
+  h6 {
+    @apply text-[24px] leading-[32px];
+  }
+  ul, ol {
+    @apply pl-7 list-outside;
+  }
+  ul{
+    @apply list-disc;
+    ul{
+      @apply list-[circle];
+      ul{
+        @apply list-[square];
+        ul{
+          @apply list-disc;
+          ul{
+            @apply list-[circle];
+            ul{
+              @apply list-[square];
+            }
+          }
+        }
+      }
+    }
+  }
+  ol{
+    @apply list-decimal;
+    ol {
+      @apply list-[upper-alpha];
+      ol {
+        @apply list-[lower-alpha];
+        ol {
+          @apply list-[upper-roman];
+          ol {
+            @apply list-[lower-roman];
+            ol {
+              @apply list-decimal;
+            }
+          }
+        }
+      }
+    }
+  }
+  a {
+    @apply text-blue-800 underline hover:decoration-double relative;
+    text-decoration-skip-ink: auto;
+  
+    &[target="_blank"]::after {
+      @apply text-blue-400;
+      content: "[↗]";
+      margin-left: 0.3em;
+      font-size: 0.9em;
+      vertical-align: middle;
+      position: relative;
+      text-decoration: none;
+      display: inline-block;
+    }
+  }
+  
+  
 }
