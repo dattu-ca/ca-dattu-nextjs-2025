@@ -90,7 +90,6 @@ body {
   a {
     @apply text-blue-800 underline hover:decoration-double relative;
     text-decoration-skip-ink: auto;
-  
     &[target="_blank"]::after {
       @apply text-blue-400;
       content: "[↗]";
@@ -102,6 +101,4 @@ body {
       display: inline-block;
     }
   }
-  
-  
 }
