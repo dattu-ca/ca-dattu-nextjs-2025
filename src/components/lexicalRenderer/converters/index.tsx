@@ -10,8 +10,8 @@ function getSlug(
 ): string {
   if (typeof item === "object" && item !== null && "slug" in item) {
     const slug = String(item.slug ?? "");
-    if(relationTo === "page"){
-        return `/page/${slug}`;
+    if (relationTo === "page") {
+      return `/page/${slug}`;
     }
     return slug;
   }
@@ -27,9 +27,12 @@ export const jsxConverter: JSXConvertersFunction<NodeTypes> = ({
     const text = nodesToJSX({ nodes: node.children });
     if (node.fields.linkType === "internal") {
       const relationTo = node.fields.doc?.relationTo;
-      let internalLink = getSlug(relationTo, node.fields.doc?.value);
+      const internalLink = getSlug(relationTo, node.fields.doc?.value);
       return (
-        <Link href={internalLink} target={node.fields.newTab ? "_blank" : undefined}>
+        <Link
+          href={internalLink}
+          target={node.fields.newTab ? "_blank" : undefined}
+        >
           {text}
         </Link>
       );
