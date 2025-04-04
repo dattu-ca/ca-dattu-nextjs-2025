@@ -4,6 +4,9 @@ import { MetadataBaseFields } from "./Metadata";
 
 export const Post: CollectionConfig = {
   slug: "post",
+  admin: {
+    useAsTitle: 'slug',
+  },
   hooks: {
     beforeChange: [
       async ({ operation, data }) => {

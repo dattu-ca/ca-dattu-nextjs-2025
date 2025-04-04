@@ -4,6 +4,9 @@ import { MetadataBaseFields } from "./Metadata";
 
 export const Page: CollectionConfig = {
   slug: "page",
+  admin: {
+    useAsTitle: 'slug',
+  },
   hooks: {
     beforeChange: [
       async ({ operation, data }) => {
