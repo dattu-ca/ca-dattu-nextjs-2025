@@ -72,7 +72,7 @@ export interface Config {
     metadata: Metadatum;
     siteMetadata: SiteMetadatum;
     page: Page;
-    post: Post;
+    article: Article;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -84,7 +84,7 @@ export interface Config {
     metadata: MetadataSelect<false> | MetadataSelect<true>;
     siteMetadata: SiteMetadataSelect<false> | SiteMetadataSelect<true>;
     page: PageSelect<false> | PageSelect<true>;
-    post: PostSelect<false> | PostSelect<true>;
+    article: ArticleSelect<false> | ArticleSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -414,9 +414,9 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "post".
+ * via the `definition` "article".
  */
-export interface Post {
+export interface Article {
   id: string;
   entryText: string;
   slug: string;
@@ -537,8 +537,8 @@ export interface PayloadLockedDocument {
         value: string | Page;
       } | null)
     | ({
-        relationTo: 'post';
-        value: string | Post;
+        relationTo: 'article';
+        value: string | Article;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -739,9 +739,9 @@ export interface PageSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "post_select".
+ * via the `definition` "article_select".
  */
-export interface PostSelect<T extends boolean = true> {
+export interface ArticleSelect<T extends boolean = true> {
   entryText?: T;
   slug?: T;
   heading?: T;
