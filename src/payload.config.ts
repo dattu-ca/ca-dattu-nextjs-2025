@@ -14,7 +14,7 @@ import { Media } from "./payload/collections/Media";
 import { Metadata } from "./payload/collections/Metadata";
 import { SiteMetadata } from "./payload/collections/SiteMetadata";
 import { Page } from "./payload/collections/Page";
-import { Post } from "./payload/collections/Post";
+import { Article } from "./payload/collections/Article";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -39,7 +39,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Metadata, SiteMetadata, Page, Post],
+  collections: [Users, Media, Metadata, SiteMetadata, Page, Article],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

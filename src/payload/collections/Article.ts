@@ -2,8 +2,8 @@ import type { CollectionConfig } from "payload";
 import slugify from "slugify";
 import { MetadataBaseFields } from "./Metadata";
 
-export const Post: CollectionConfig = {
-  slug: "post",
+export const Article: CollectionConfig = {
+  slug: "article",
   admin: {
     useAsTitle: 'slug',
   },

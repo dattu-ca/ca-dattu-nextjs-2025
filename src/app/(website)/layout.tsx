@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import clsx from "clsx";
-import UnderConstruction from "#/components/under-construction";
 import { payloadServices } from "#/services/payload";
 import { Metadata } from "next";
 import { proessAndGetSocialMetadata as proessAndGetMetadata } from "#/utils/metadata";
@@ -62,8 +61,7 @@ export default function RootLayout({
           "bg-slate-100"
         )}
       >
-        <UnderConstruction />
-        <div className="pt-[124px]">{children}</div>
+        {children}
       </body>
     </html>
   );
